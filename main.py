@@ -1,7 +1,10 @@
 import requests
+import os
 from itertools import count
 from terminaltables import AsciiTable
-super_job_token = "your_super_job_token"
+from dotenv import load_dotenv
+
+
 def predict_rub_salary(salary_from=None,salary_to=None):
     if salary_from and salary_to:
         middle_salary = int((salary_from+salary_to)/2)
@@ -12,6 +15,8 @@ def predict_rub_salary(salary_from=None,salary_to=None):
     else:
         middle_salary=None 
     return middle_salary
+
+
 def hh_statistic():
     languages = ["python", "c", "c#", "c++", "java", "js", "ruby", "go", "1c"]
     vacansis_found = {}
@@ -39,14 +44,16 @@ def hh_statistic():
             "average_salary":average_salary
         }
     return vacansis_found
-def sj_statistic():
+
+
+def sj_statistic(sj_token):
     languages = ['Python','Java']
     vacansis_found = {}
     for language in languages:
         all_money = []
         for page in count(0,1):
             payload = {"keyword": language,"town": "Moscow","period": 30,"page":page}
-            headers ={"X-Api-App-Id": super_job_token}
+            headers = {"X-Api-App-Id": sj_token}
             response = requests.get('https://api.superjob.ru/2.0/vacancies', params=payload,headers=headers)
             response.raise_for_status()
             vacansy_found = response.json()["total"] 
@@ -66,6 +73,8 @@ def sj_statistic():
         }
     return vacansis_found
 
+
+
 def get_table(statistic):
     table_data = [
            ["Язык програмирования","Вакансий найдено","Вакансий обработано","Средняя зарплата"]
@@ -79,5 +88,14 @@ def get_table(statistic):
         ])
     table = AsciiTable(table_data)
     return table.table
-print(get_table(sj_statistic()))
-print(get_table(hh_statistic()))
+
+
+def main():
+    load_dotenv()
+    sj_token = os.environ['SJ_TOKEN']
+    print(get_table(sj_statistic(sj_token)))
+    print(get_table(hh_statistic()))
+
+
+if __name__ == '__main__':
+    main()
