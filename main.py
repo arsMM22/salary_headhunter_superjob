@@ -1,7 +1,7 @@
 import requests
 from itertools import count
 from terminaltables import AsciiTable
-super_job_token = "v3.r.138401654.adc7fa533f117f616aebef2822a4be9690583eb8.3198eaa9852a16c8ceaa85335ea73be63a66e029"
+super_job_token = "your_super_job_token"
 def predict_rub_salary(salary_from=None,salary_to=None):
     if salary_from and salary_to:
         middle_salary = int((salary_from+salary_to)/2)
