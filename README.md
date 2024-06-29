@@ -34,7 +34,7 @@ install -r requirements.txt
 
 1. Установите API токен для SuperJob в скрипте:
     ```python
-    super_job_token = "your_superjob_token_here"
+    SUPERJOB_TOKEN = "your_superjob_token_here"
     ```
 
 2. Запустите скрипт:
