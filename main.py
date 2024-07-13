@@ -21,7 +21,7 @@ def get_hh_statistic():
     languages = ["python", "c", "c#", "c++", "java", "js", "ruby", "go", "1c"]
     vacancies_found_hh = {}
     for language in languages:
-        all_salary = []
+        all_salaries = []
         for page in count(0, 1):
             id = 1
             period = 30
@@ -45,12 +45,12 @@ def get_hh_statistic():
                         vacansy_salary["salary"].get("from"),
                         vacansy_salary["salary"].get("to"))
                     if predicted_rub_salary:
-                        all_salary.append(predicted_rub_salary)
-        if all_salary:
-            average_salary = int(sum(all_salary) / len(all_salary))
+                        all_salaries.append(predicted_rub_salary)
+        if all_salaries:
+            average_salary = int(sum(all_salaries) / len(all_salaries))
         vacancies_found_hh[language] = {
             "vacancies_found": vacancies_found,
-            "vacancies_processed": len(all_salary),
+            "vacancies_processed": len(all_salaries),
             "average_salary": average_salary
         }
     return vacancies_found_hh
@@ -60,7 +60,7 @@ def get_sj_statistic(sj_token):
     languages = ['Python', 'Java']
     vacancies_found_sj = {}
     for language in languages:
-        all_salary = []
+        all_salaries = []
         for page in count(0, 1):
             period = 30
             payload = {
@@ -83,12 +83,12 @@ def get_sj_statistic(sj_token):
                     vacansy_salary["payment_from"],
                     vacansy_salary["payment_to"])
                 if predicted_rub_salary:
-                    all_salary.append(predicted_rub_salary)
-        if all_salary:
-            average_salary = int(sum(all_salary) / len(all_salary))
+                    all_salaries.append(predicted_rub_salary)
+        if all_salaries:
+            average_salary = int(sum(all_salaries) / len(all_salaries))
         vacancies_found_sj[language] = {
             "vacancies_found": vacancies_found,
-            "vacancies_processed": len(all_salary),
+            "vacancies_processed": len(all_salaries),
             "average_salary": average_salary
         }
 
