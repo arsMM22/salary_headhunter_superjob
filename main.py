@@ -36,10 +36,9 @@ def get_hh_statistic():
             response.raise_for_status()
             vacancies = response.json()
             vacancies_found = vacancies["found"]
-            vacancies_salary = vacancies["items"]
             if page >= response.json()["pages"] - 1:
                 break
-            for vacansy_salary in vacancies_salary:
+            for vacansy_salary in vacancies["items"]:
                 salary = vacansy_salary.get("salary")
                 if salary and salary["currency"]:
                     predicted_rub_salary = predict_rub_salary(
@@ -77,10 +76,9 @@ def get_sj_statistic(sj_token):
             response.raise_for_status()
             vacancies = response.json()
             vacancies_found = vacancies["total"]
-            vacancies_salary = vacancies["objects"]
-            if not vacancies_salary:
+            if not vacancies["objects"]:
                 break
-            for vacansy_salary in vacancies_salary:
+            for vacansy_salary in vacancies["objects"]:
                 predicted_rub_salary = predict_rub_salary(
                     vacansy_salary["payment_from"],
                     vacansy_salary["payment_to"])
