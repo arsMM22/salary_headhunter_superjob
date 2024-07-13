@@ -46,6 +46,7 @@ def get_hh_statistic():
                         vacansy_salary["salary"].get("to"))
                     if predicted_rub_salary:
                         all_salaries.append(predicted_rub_salary)
+        average_salaru = None
         if all_salaries:
             average_salary = int(sum(all_salaries) / len(all_salaries))
         vacancies_found_hh[language] = {
@@ -84,6 +85,7 @@ def get_sj_statistic(sj_token):
                     vacansy_salary["payment_to"])
                 if predicted_rub_salary:
                     all_salaries.append(predicted_rub_salary)
+        average_salary = None
         if all_salaries:
             average_salary = int(sum(all_salaries) / len(all_salaries))
         vacancies_found_sj[language] = {
