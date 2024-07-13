@@ -23,11 +23,11 @@ def get_hh_statistic():
     for language in languages:
         all_salaries = []
         for page in count(0, 1):
-            id = 1
+            city_number = 1
             period = 30
             payload = {
                 "text": f"программист {language}",
-                "area": id,
+                "area": city_number,
                 "period": period,
                 "page": page
             }
