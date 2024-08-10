@@ -40,7 +40,7 @@ def get_hh_statistic():
                 break
             for vacansy in vacancies["items"]:
                 salary = vacansy.get("salary")
-                if salary and salary["currency"]:
+                if salary and salary["currency"] == "RUR":
                     predicted_rub_salary = predict_rub_salary(
                         vacansy["salary"].get("from"),
                         vacansy["salary"].get("to"))
